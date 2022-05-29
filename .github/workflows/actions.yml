@@ -2,6 +2,10 @@ name: Actions workflow
 
 on:
   # push:
+  # repository_dispatch for running the workflow using API(manually)
+  repository_dispatch:
+    types:
+      - build
   schedule:
     - cron: "0/5 * * * *"
     - cron: "0 12 3 * *"
