@@ -1,20 +1,31 @@
 name: Actions workflow
 
 on:
-  # push:
-  # repository_dispatch for running the workflow using API(manually)
-  repository_dispatch:
-    types:
-      - build
-  schedule:
-    - cron: "0/5 * * * *"
-    - cron: "0 12 3 * *"
-  pull_request:
-    types:
-      - closed
-      - assigned
-      - opened
-      - reopened
+  push:
+    branches:
+      - main
+      - 'AB#*'  # regexp
+      - '!AB#99' # ignoring the specific branch that is matched
+    tags:
+      - 'v1.*' # trigered if new tag is created with the specified regexp
+    paths:
+      - '*.js' # triggered when we push any js file
+    # branches-ignore:
+    #   - develop
+  # # push:
+  # # repository_dispatch for running the workflow using API(manually)
+  # repository_dispatch:
+  #   types:
+  #     - build
+  # schedule:
+  #   - cron: "0/5 * * * *"
+  #   - cron: "0 12 3 * *"
+  # pull_request:
+  #   types:
+  #     - closed
+  #     - assigned
+  #     - opened
+  #     - reopened
 
 jobs:
   run-github-actions:
